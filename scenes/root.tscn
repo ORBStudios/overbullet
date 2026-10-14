@@ -1,0 +1,119 @@
+[gd_scene load_steps=12 format=3 uid="uid://c12780im74ex5"]
+
+[ext_resource type="PackedScene" uid="uid://dxawjyuoc7oa0" path="res://scenes/player.tscn" id="1_j5px3"]
+[ext_resource type="PackedScene" uid="uid://jspsy5k1m6mf" path="res://models/fps_shooter_game_arena_map_v4.glb" id="2_twpsu"]
+[ext_resource type="Script" uid="uid://bdvl45wajnlab" path="res://scripts/bot.gd" id="3_lrqlo"]
+[ext_resource type="Script" uid="uid://bynjy2rmg14nn" path="res://scripts/hud.gd" id="4_sqa0i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7up8o"]
+
+[sub_resource type="Sky" id="Sky_j5px3"]
+sky_material = SubResource("ProceduralSkyMaterial_7up8o")
+
+[sub_resource type="Environment" id="Environment_twpsu"]
+background_mode = 2
+sky = SubResource("Sky_j5px3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_twpsu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sqa0i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lrqlo"]
+font_size = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqa0i"]
+
+[node name="root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_twpsu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 26)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_j5px3")]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_twpsu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -1, -25)
+
+[node name="bot" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+script = ExtResource("3_lrqlo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bot"]
+shape = SubResource("BoxShape3D_twpsu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bot"]
+mesh = SubResource("BoxMesh_sqa0i")
+
+[node name="bot2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97584, 1, 0)
+script = ExtResource("3_lrqlo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bot2"]
+shape = SubResource("BoxShape3D_twpsu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bot2"]
+mesh = SubResource("BoxMesh_sqa0i")
+
+[node name="bot3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97584, 1, 6.15745)
+script = ExtResource("3_lrqlo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bot3"]
+shape = SubResource("BoxShape3D_twpsu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bot3"]
+mesh = SubResource("BoxMesh_sqa0i")
+
+[node name="bot4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.326, 1, 6.15745)
+script = ExtResource("3_lrqlo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bot4"]
+shape = SubResource("BoxShape3D_twpsu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bot4"]
+mesh = SubResource("BoxMesh_sqa0i")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_sqa0i")
+
+[node name="crosshair" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HUD/crosshair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+label_settings = SubResource("LabelSettings_lrqlo")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.89
+anchor_right = 0.7
+anchor_bottom = 0.93
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_sqa0i")
+step = 1.0
+show_percentage = false

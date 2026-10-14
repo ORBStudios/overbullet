@@ -1,0 +1,109 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://jspsy5k1m6mf"
+path="res://.godot/imported/fps_shooter_game_arena_map_v4.glb-a662f788b841b07862114447df308be1.scn"
+
+[deps]
+
+source_file="res://models/fps_shooter_game_arena_map_v4.glb"
+dest_files=["res://.godot/imported/fps_shooter_game_arena_map_v4.glb-a662f788b841b07862114447df308be1.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/Cube__10_/Cube__10__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/Cube__11_/Cube__11__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/Cube__6_/Cube__6__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/Cube__7_/Cube__7__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/Cube__8_/Cube__8__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/Cube__9_/Cube__9__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape/PolyShape_Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__10_/PolyShape__10__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__11_/PolyShape__11__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__1_/PolyShape__1__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__2_/PolyShape__2__Orange_Playground_Base_Color_1_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__3_/PolyShape__3__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__4_/PolyShape__4__Orange_Playground_Base_Color_1_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__5_/PolyShape__5__Orange_Playground_Base_Color_1_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__6_/PolyShape__6__Orange_Playground_Base_Color_1_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__7_/PolyShape__7__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__8_/PolyShape__8__Orange_Playground_Base_Color_1_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Obstacles/PolyShape__9_/PolyShape__9__Orange_Playground_Base_Color_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Walls/Cube/Cube_Black_1_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Walls/Cube__1_/Cube__1__Black_2_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Walls/Cube__2_/Cube__2__Black_2_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Walls/Cube__3_/Cube__3__Black_2_0": {
+"generate/physics": true
+},
+"PATH:Sketchfab_model/6aaf6fa3ef1c4befb8003a833b2394d9_fbx/RootNode/Arena_Map_4/Arena_Map_4_1/Walls/Cube__4_/Cube__4__Black_2_0": {
+"generate/physics": true
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1
