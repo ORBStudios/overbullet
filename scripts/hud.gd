@@ -2,9 +2,14 @@ extends CanvasLayer
 
 @onready var hpbar = $ProgressBar
 @onready var hptxt = $HPTEXT
+@onready var ammostat = $ammostat
+
 func hpupdate(hpnow:int):
 	hpbar.value = hpnow
 	hptxt.text = str(hpnow)
+	
+func  ammoupdate(mag:int,reserve:int):
+	ammostat.text = str(mag)+"/"+str(reserve)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hpbar.value = 100

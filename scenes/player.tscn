@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxawjyuoc7oa0"]
+[gd_scene load_steps=5 format=3 uid="uid://dxawjyuoc7oa0"]
 
 [ext_resource type="Script" uid="uid://cttkttrwrt4yf" path="res://scripts/character_body_3d.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://lpkwkblt7thb" path="res://scripts/weaponmanager.gd" id="2_g2els"]
-[ext_resource type="PackedScene" uid="uid://beaxm7pjg3pvo" path="res://weapons/m4/m4.tscn" id="3_qhqgy"]
-[ext_resource type="PackedScene" uid="uid://l3373r1f1oxy" path="res://weapons/pistol/pistol.tscn" id="4_dqkch"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.35
@@ -32,12 +30,10 @@ target_position = Vector3(0, 0, -100)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0)
 script = ExtResource("2_g2els")
 
-[node name="M16 Body_7" parent="head/Camera3D/weaponmanager" instance=ExtResource("3_qhqgy")]
-visible = false
-
-[node name="Glock Handgun Body_44" parent="head/Camera3D/weaponmanager" instance=ExtResource("4_dqkch")]
-transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, 0.4, 1.3, -0.5)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("CapsuleMesh_3vyb7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.19249e-08, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, -3.08639e-09, 1.15185e-08, 3, 1, 0)
+visible = false

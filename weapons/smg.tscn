@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgc86vbjf0vpp"]
+
+[ext_resource type="PackedScene" uid="uid://hckvl6yfmrkh" path="res://models/smg.glb" id="1_n4llf"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_n4llf")]
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(0.35, 0, 0, 0, -1.5299e-08, 0.35, 0, -0.35, -1.5299e-08, 0.5, 0.8, -0.4)
+
+[node name="leftarm_86" parent="Sketchfab_model/root/GLTF_SceneRootNode/_112/main_111" index="4"]
+transform = Transform3D(0.784302, -0.32632, -0.527623, -0.619689, -0.371972, -0.691102, 0.0292589, 0.868995, -0.493955, -0.66875, -0.54375, -0.5375)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://bjt5r527pbfk8"]
+
+[ext_resource type="Script" uid="uid://cux7drn6fn7j1" path="res://scripts/weapon.gd" id="1_35wr5"]
+
+[resource]
+script = ExtResource("1_35wr5")
+weapon_name = "Weapon"
+damage = 10
+fire_rate = 0.14
+magazine_size = 12
+reload_time = 1.65
+reserve_ammo = 125
+draw = 0.6
+metadata/_custom_type_script = "uid://cux7drn6fn7j1"

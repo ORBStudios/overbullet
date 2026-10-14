@@ -7,3 +7,4 @@ class_name Weapon
 @export var magazine_size: int = 22
 @export var reload_time: float = 1.2
 @export var reserve_ammo: int = 66
+@export var draw: float = 0.6
