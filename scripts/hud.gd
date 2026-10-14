@@ -1,12 +1,14 @@
 extends CanvasLayer
 
 @onready var hpbar = $ProgressBar
+@onready var hptxt = $HPTEXT
 func hpupdate(hpnow:int):
 	hpbar.value = hpnow
+	hptxt.text = str(hpnow)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hpbar.value = 100
-
+	hptxt.text = "100"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
