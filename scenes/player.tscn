@@ -11,6 +11,7 @@ radius = 0.35
 height = 1.8
 
 [node name="jkchakka" type="CharacterBody3D"]
+[node name="player" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
