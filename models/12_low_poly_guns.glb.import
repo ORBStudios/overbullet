@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ve1resca8ami"
-path="res://.godot/imported/smg.glb-08bc31ace0225182bec8aa969ef3ec14.scn"
+uid="uid://fnic3fh3mxuv"
+path="res://.godot/imported/12_low_poly_guns.glb-fa1a6ddb9c632758f13afc446323e3a8.scn"
 
 [deps]
 
-source_file="res://models/guns/smg.glb"
-dest_files=["res://.godot/imported/smg.glb-08bc31ace0225182bec8aa969ef3ec14.scn"]
+source_file="res://models/12_low_poly_guns.glb"
+dest_files=["res://.godot/imported/12_low_poly_guns.glb-fa1a6ddb9c632758f13afc446323e3a8.scn"]
 
 [params]
 

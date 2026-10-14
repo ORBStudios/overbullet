@@ -4,7 +4,7 @@ extends CharacterBody3D
 const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
 
-# movement
+# Movement
 const GROUND_ACCEL = 14.0
 const GROUND_FRICTION = 8.0
 const STOP_SPEED = 2.0
@@ -12,19 +12,12 @@ const AIR_ACCEL = 0.5
 
 const SENS = 0.002
 
-var firerate = 0.15
-var magsize = 22
-var ammo = magsize
-var reloadtime = 1.2
-var isreloading = false
-var canshoot = true
-
-var health = 100
+var health: int = 100
 var paused: bool = false
 
 @onready var head: Node3D = $head
-@onready var ray: RayCast3D = $head/Camera3D/RayCast3D
 @onready var hud: CanvasLayer = $"../HUD"
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -37,33 +30,28 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENS)
 		head.rotate_x(-event.relative.y * SENS)
+
 		head.rotation.x = clamp(
 			head.rotation.x,
 			deg_to_rad(-89.0),
 			deg_to_rad(89.0)
 		)
-		
-func reload():
-	if isreloading or ammo == magsize:
-		return
-	isreloading = true
-	canshoot = false
-	print("reloading")
-	await get_tree().create_timer(reloadtime).timeout
-	ammo = magsize
-	canshoot = true
-	isreloading = false
-	print("reloaded, ammo = ",ammo,"/",magsize)
+
+
 func take_damage(amount: int) -> void:
-	health = maxi(health-amount,0)
-	print("hp: ", health)
+	health = maxi(health - amount, 0)
+	print("HP: ", health)
 	hud.hpupdate(health)
+
 	if health <= 0:
-		print("eliminated")
+		print("Eliminated")
+
 
 func _process(_delta: float) -> void:
+	# Temporary health test. Remove when finished.
 	if Input.is_key_pressed(KEY_H):
 		take_damage(1)
+
 	if Input.is_action_just_pressed("exit"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			paused = true
@@ -76,10 +64,11 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# Gravity always continues, including while the menu is open.
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	# Freeze horizontal movement while the local menu is open.
+
+	# Freeze horizontal movement while the menu is open
 	if paused:
 		velocity.x = 0.0
 		velocity.z = 0.0
@@ -89,20 +78,6 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector(
 		"left", "right", "forward", "back"
 	)
-	if Input.is_action_just_pressed("reload"):
-		reload()
-	if Input.is_action_pressed("fire") and canshoot and not isreloading and ammo>0:
-		canshoot = false
-		ammo -= 1
-		ray.force_raycast_update()
-		if ray.is_colliding():
-			var obj = ray.get_collider()
-			if obj.has_method("take_damage"):
-				obj.take_damage(10)
-		print("ammo: ",ammo,"/",magsize)
-		await get_tree().create_timer(firerate).timeout
-		canshoot = true     
-			
 
 	var wish_dir := (
 		transform.basis

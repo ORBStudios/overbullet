@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxawjyuoc7oa0"]
+[gd_scene load_steps=5 format=3 uid="uid://dxawjyuoc7oa0"]
 
 [ext_resource type="Script" uid="uid://cttkttrwrt4yf" path="res://scripts/character_body_3d.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://lpkwkblt7thb" path="res://scripts/weaponmanager.gd" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.35
@@ -24,6 +25,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
 target_position = Vector3(0, 0, -100)
+
+[node name="weaponmanager" type="Node3D" parent="head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0)
+script = ExtResource("2_g2els")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
