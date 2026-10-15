@@ -35,7 +35,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 target_position = Vector3(0, 0, -100)
 
 [node name="weaponmanager" type="Node3D" parent="head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0)
 script = ExtResource("2_g2els")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

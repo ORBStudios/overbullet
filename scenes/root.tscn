@@ -97,6 +97,7 @@ mesh = SubResource("BoxMesh_sqa0i")
 script = ExtResource("4_sqa0i")
 
 [node name="TempMenu" type="Panel" parent="GameUI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -120,7 +121,6 @@ offset_bottom = 185.0
 placeholder_text = "UserName"
 
 [node name="HUD" type="Control" parent="GameUI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
