@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxawjyuoc7oa0"]
+[gd_scene load_steps=6 format=3 uid="uid://dxawjyuoc7oa0"]
 
 [ext_resource type="Script" uid="uid://cttkttrwrt4yf" path="res://scripts/character_body_3d.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://lpkwkblt7thb" path="res://scripts/weaponmanager.gd" id="2_g2els"]
@@ -10,6 +10,14 @@ height = 1.8
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3vyb7"]
 radius = 0.35
 height = 1.8
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g2els"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
@@ -37,3 +45,6 @@ mesh = SubResource("CapsuleMesh_3vyb7")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1.19249e-08, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, -3.08639e-09, 1.15185e-08, 3, 1, 0)
 visible = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_g2els")

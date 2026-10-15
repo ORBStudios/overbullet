@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var hpbar = $ProgressBar
-@onready var hptxt = $HPTEXT
-@onready var ammostat = $ammostat
+@onready var hpbar = $HUD/ProgressBar
+@onready var hptxt = $HUD/HPTEXT
+@onready var ammostat = $HUD/ammostat
 
 func hpupdate(hpnow:int):
 	hpbar.value = hpnow

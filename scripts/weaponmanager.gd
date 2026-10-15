@@ -19,7 +19,7 @@ var canshoot: bool = true
 
 
 @onready var ray: RayCast3D = $"../RayCast3D"
-@onready var hud: CanvasLayer = $"../../../../HUD"
+@onready var hud = get_tree().root.get_node("root/GameUI")
 
 func _ready() -> void:
 	for i in range(WEAPON_CONFIG.size()):
@@ -28,6 +28,8 @@ func _ready() -> void:
 	call_deferred("equip_weapon",weaponnow)
 
 func _process(_delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
 	if Input.is_action_just_pressed("switch prev"):
 		switch_weapon(-1)
 
@@ -42,6 +44,8 @@ func _process(_delta: float) -> void:
 
 
 func switch_weapon(direction: int) -> void:
+	if not is_multiplayer_authority():
+		return
 	if isreloading:
 		return
 	var next_index := (
@@ -73,6 +77,8 @@ func equip_weapon(index: int) -> void:
 	print("Equipped: ", current_weapon.name)
 	
 func shoot() -> void:
+	if not is_multiplayer_authority():
+		return
 	var ammodat = ammos[weaponnow]
 	if not canshoot or isreloading or ammodat["mag"] <= 0:
 		return
@@ -102,6 +108,8 @@ func shoot() -> void:
 	canshoot = true
 
 func reload_weapon() -> void:
+	if not is_multiplayer_authority():
+		return
 	var config = WEAPON_CONFIG[weaponnow]
 	var ammodat = ammos[weaponnow]
 	if isreloading or ammodat["mag"] == config.magazine_size or ammodat["reserve"] <= 0:

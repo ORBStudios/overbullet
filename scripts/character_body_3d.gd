@@ -1,6 +1,10 @@
 
 extends CharacterBody3D
 
+var username
+var userID
+
+
 const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
 
@@ -16,27 +20,34 @@ var health: int = 100
 var paused: bool = false
 
 @onready var head: Node3D = $head
-@onready var hud: CanvasLayer = $"../HUD"
+@onready var hud = get_tree().root.get_node("root/GameUI")
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if is_multiplayer_authority():
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		head.get_node("Camera3D").current = true
+	else:
+		head.get_node("Camera3D").current = false
 
-
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+func _input(event: InputEvent) -> void:
+	if not is_multiplayer_authority():
 		return
 
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * SENS)
-		head.rotate_x(-event.relative.y * SENS)
+		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+			return
+
+		var mouse_event := event as InputEventMouseMotion
+
+		rotate_y(-mouse_event.relative.x * SENS)
+		head.rotate_x(-mouse_event.relative.y * SENS)
 
 		head.rotation.x = clamp(
 			head.rotation.x,
 			deg_to_rad(-89.0),
 			deg_to_rad(89.0)
 		)
-
 
 func take_damage(amount: int) -> void:
 	health = maxi(health - amount, 0)
@@ -48,10 +59,10 @@ func take_damage(amount: int) -> void:
 
 
 func _process(_delta: float) -> void:
-	# Temporary health test. Remove when finished.
+	if not is_multiplayer_authority():
+		return
 	if Input.is_key_pressed(KEY_H):
 		take_damage(1)
-
 	if Input.is_action_just_pressed("exit"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			paused = true
@@ -64,7 +75,8 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# Gravity
+	if not is_multiplayer_authority():
+		return
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 

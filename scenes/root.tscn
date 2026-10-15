@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c12780im74ex5"]
+[gd_scene load_steps=15 format=3 uid="uid://c12780im74ex5"]
 
-[ext_resource type="PackedScene" uid="uid://dxawjyuoc7oa0" path="res://scenes/player.tscn" id="1_j5px3"]
+[ext_resource type="Script" uid="uid://mhjr8tebkept" path="res://scripts/network_manger.gd" id="1_jh1ax"]
+[ext_resource type="Script" uid="uid://b08fv58j4jsy3" path="res://scripts/game_manager.gd" id="2_kycxp"]
 [ext_resource type="PackedScene" uid="uid://jspsy5k1m6mf" path="res://models/fps_shooter_game_arena_map_v4.glb" id="2_twpsu"]
 [ext_resource type="Script" uid="uid://bdvl45wajnlab" path="res://scripts/bot.gd" id="3_lrqlo"]
 [ext_resource type="Script" uid="uid://bynjy2rmg14nn" path="res://scripts/hud.gd" id="4_sqa0i"]
@@ -31,13 +32,23 @@ font_size = 24
 
 [node name="root" type="Node3D"]
 
+[node name="NetworkManger" type="Node3D" parent="."]
+script = ExtResource("1_jh1ax")
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("2_kycxp")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_twpsu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 26)
 
-[node name="player" parent="." instance=ExtResource("1_j5px3")]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dxawjyuoc7oa0")
+spawn_path = NodePath("../players")
+
+[node name="players" type="Node3D" parent="."]
 
 [node name="map" parent="." instance=ExtResource("2_twpsu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -1, -25)
@@ -82,19 +93,53 @@ shape = SubResource("BoxShape3D_twpsu")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="bot4"]
 mesh = SubResource("BoxMesh_sqa0i")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="GameUI" type="CanvasLayer" parent="."]
 script = ExtResource("4_sqa0i")
 
-[node name="crosshair" type="Control" parent="HUD"]
+[node name="TempMenu" type="Panel" parent="GameUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="GameUI/TempMenu"]
+layout_mode = 0
+offset_left = 493.0
+offset_top = 255.0
+offset_right = 687.0
+offset_bottom = 308.0
+text = "JOIN "
+
+[node name="TextEdit" type="TextEdit" parent="GameUI/TempMenu"]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 155.0
+offset_right = 733.0
+offset_bottom = 185.0
+placeholder_text = "UserName"
+
+[node name="HUD" type="Control" parent="GameUI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="crosshair" type="Control" parent="GameUI/HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="HUD/crosshair"]
+[node name="Label" type="Label" parent="GameUI/HUD/crosshair"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -113,36 +158,50 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+[node name="ProgressBar" type="ProgressBar" parent="GameUI/HUD"]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.89
+anchor_left = 0.186
+anchor_top = -0.22
 anchor_right = 0.7
-anchor_bottom = 0.93
+offset_left = -169.272
+offset_top = 718.56
+offset_right = -466.4
+offset_bottom = 608.0
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_sqa0i")
 step = 1.0
 show_percentage = false
 
-[node name="HPTEXT" type="Label" parent="HUD"]
+[node name="HPTEXT" type="Label" parent="GameUI/HUD"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.23
 anchor_top = 0.942
 anchor_right = 0.23
 anchor_bottom = 0.942
-offset_left = 0.0400085
-offset_right = 60.04
+offset_left = -225.96
+offset_top = -66.416
+offset_right = -132.96
+offset_bottom = -32.416
 grow_vertical = 0
 text = "<HP>"
 label_settings = SubResource("LabelSettings_sqa0i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ammostat" type="Label" parent="HUD"]
+[node name="ammostat" type="Label" parent="GameUI/HUD"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
 anchor_top = 0.89
 anchor_right = 0.75
 anchor_bottom = 0.89
+offset_left = 140.0
+offset_top = -7.71997
+offset_right = 251.0
+offset_bottom = 41.28
 text = "<--/-->"
 label_settings = SubResource("LabelSettings_jh1ax")
+
+[connection signal="pressed" from="GameUI/TempMenu/Button" to="NetworkManger" method="_on_button_pressed"]
