@@ -124,9 +124,4 @@ func _on_server_disconnected() -> void:
 
 
 func _on_button_pressed() -> void:
-	var inputip: String = $"../GameUI/TempMenu/TextEdit".text.strip_edges()
-
-	if inputip.is_empty():
-		join_server()
-	else:
-		join_server(inputip)
+	join_server()
