@@ -34,10 +34,10 @@ func start_server() -> void:
 	print("SERVER STARTED | Port: ", PORT)
 
 
-func join_server(address: String = "127.0.0.1") -> void:
+func join_server(address: String = "26.54.110.3") -> void:
 	var peer := ENetMultiplayerPeer.new()
 	var error := peer.create_client(address, PORT)
-
+	print(address)
 	if error != OK:
 		push_error("Could not start client connection: %s" % error)
 		return

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://lpkwkblt7thb" path="res://scripts/weaponmanager.gd" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
-radius = 0.35
 height = 1.8
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3vyb7"]
@@ -35,7 +34,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 target_position = Vector3(0, 0, -100)
 
 [node name="weaponmanager" type="Node3D" parent="head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0)
 script = ExtResource("2_g2els")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
