@@ -23,8 +23,11 @@ var canshoot: bool = true
 # Changes whenever a new weapon is selected.
 var weapon_switch_id: int = 0
 
+@onready var GameManager = get_tree().current_scene.get_node_or_null("%GameManager")
+
 @onready var ray: RayCast3D = $"../RayCast3D"
 @onready var hud: CanvasLayer = get_tree().current_scene.get_node_or_null("%GameUI")
+@onready var player = $"../../.."
 
 func _ready() -> void:
 	for i in range(WEAPON_CONFIG.size()):
@@ -136,7 +139,17 @@ func update_ammo_hud() -> void:
 	var ammodat = ammos[weaponnow]
 	hud_node.ammoupdate(ammodat["mag"], ammodat["reserve"])
 
-
+@rpc("any_peer","reliable")
+func req_shoot(pos,dir):
+	if not multiplayer.is_server():
+		return
+	var shooter_id = multiplayer.get_remote_sender_id()
+	var raycast = PhysicsRayQueryParameters3D.create(pos, pos+dir.normalized()*100)
+	var result = get_world_3d().direct_space_state.intersect_ray(raycast)
+	if result.collider is Player:
+		if $players.get_node_or_null(str(shooter_id)).team != result.collider():
+			GameManager.apply_damage(result.collider,5) #temp damage h
+	
 func shoot() -> void:
 	var ammodat = ammos[weaponnow]
 
@@ -164,13 +177,16 @@ func shoot() -> void:
 		else:
 			anim.play("Arms|shoot")
 
-	ray.force_raycast_update()
-
-	if ray.is_colliding():
-		var obj = ray.get_collider()
-
-		if obj.has_method("take_damage"):
-			obj.take_damage(config.damage)
+	req_shoot.rpc_id(1, player.head.global_position, -player.head.global_transform.basis.z)
+	#ray.force_raycast_update()
+#
+	#if ray.is_colliding():
+		#var obj = ray.get_collider()
+#
+		#if obj.has_method("take_damage"):
+			#obj.take_damage(config.damage)
+			
+	
 
 	print(
 		"Ammo: ",

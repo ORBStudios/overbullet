@@ -72,7 +72,7 @@ func spawn_custom_player(data: Variant) -> Node:
 	player.name = str(id)
 	player.userID = str(id)
 	player.set_multiplayer_authority(id)
-
+	$"../GameManager".player = player
 	print("Creating player: ", id)
 	return player
 

@@ -1,9 +1,9 @@
-
+class_name Player
 extends CharacterBody3D
 
 var username
 var userID
-
+var team
 
 const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
@@ -57,6 +57,14 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		print("Eliminated")
 
+
+
+func respawn():
+	if not multiplayer.is_server():
+		return
+	
+
+# MOVEMENT
 
 func _process(_delta: float) -> void:
 	if not is_multiplayer_authority():

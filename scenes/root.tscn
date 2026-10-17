@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c12780im74ex5"]
+[gd_scene load_steps=16 format=3 uid="uid://c12780im74ex5"]
 
 [ext_resource type="Script" uid="uid://mhjr8tebkept" path="res://scripts/network_manger.gd" id="1_jh1ax"]
 [ext_resource type="Script" uid="uid://b08fv58j4jsy3" path="res://scripts/game_manager.gd" id="2_kycxp"]
-[ext_resource type="PackedScene" uid="uid://jspsy5k1m6mf" path="res://models/fps_shooter_game_arena_map_v4.glb" id="2_twpsu"]
+[ext_resource type="PackedScene" uid="uid://bneko5eyvkucm" path="res://models/map1.glb" id="3_kycxp"]
 [ext_resource type="Script" uid="uid://bdvl45wajnlab" path="res://scripts/bot.gd" id="3_lrqlo"]
+[ext_resource type="PackedScene" uid="uid://dxawjyuoc7oa0" path="res://scenes/player.tscn" id="4_j287u"]
 [ext_resource type="Script" uid="uid://bynjy2rmg14nn" path="res://scripts/hud.gd" id="4_sqa0i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7up8o"]
@@ -41,6 +42,9 @@ script = ExtResource("2_kycxp")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_twpsu")
 
+[node name="map" parent="." instance=ExtResource("3_kycxp")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.6, 0)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 26)
 
@@ -50,8 +54,7 @@ spawn_path = NodePath("../players")
 
 [node name="players" type="Node3D" parent="."]
 
-[node name="map" parent="." instance=ExtResource("2_twpsu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -1, -25)
+[node name="player" parent="players" instance=ExtResource("4_j287u")]
 
 [node name="bot" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)

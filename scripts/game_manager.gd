@@ -1,9 +1,28 @@
 extends Node3D
 
+var player
+enum TEAM {
+	BLUE,
+	RED
+}
+var PLAYERS = []
 
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
+func player_join(player):
+	PLAYERS.append(player)
+	player.team = TEAM.BLUE if PLAYERS.size() %2 == 0 else TEAM.RED
+	
 func _process(delta: float) -> void:
 	pass
+
+func apply_damage(player,damage):
+	if not multiplayer.is_server():
+		return
+		
+	player.health -= damage
+	if player.health <= 0:
+		player.health = 100
+		player.respawn()
