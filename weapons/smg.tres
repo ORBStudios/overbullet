@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_35wr5")
-weapon_name = "Weapon"
+weapon_name = "smg"
 damage = 10
 fire_rate = 0.14
 magazine_size = 30

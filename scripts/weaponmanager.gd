@@ -56,6 +56,8 @@ func _process(_delta: float) -> void:
 
 func switch_weapon(direction: int) -> void:
 	# Reloading cannot be interrupted for now.
+	if not is_multiplayer_authority():
+		return
 	if isreloading:
 		return
 

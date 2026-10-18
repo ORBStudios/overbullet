@@ -5,8 +5,8 @@ var username
 var userID
 var team
 
-const SPEED = 7.0
-const JUMP_VELOCITY = 6.0
+const SPEED = 6.2
+const JUMP_VELOCITY = 5.0
 
 # Movement
 const GROUND_ACCEL = 14.0
