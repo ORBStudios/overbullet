@@ -21,12 +21,17 @@ var paused: bool = false
 
 @onready var head: Node3D = $head
 @onready var hud = get_tree().root.get_node("root/GameUI")
+@onready var map = get_tree().root.get_node("root/map")
 
+@onready var RedspawnPoint = map.get_node("SpawnPoints/RedSpawnPoints").get_children()
+@onready var BluespawnPoint = map.get_node("SpawnPoints/BlueSpawnPoints").get_children()
 
 func _ready() -> void:
+	$VariableSynchronizer.set_multiplayer_authority(1)
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		head.get_node("Camera3D").current = true
+		
 	else:
 		head.get_node("Camera3D").current = false
 
@@ -48,20 +53,35 @@ func _input(event: InputEvent) -> void:
 			deg_to_rad(-89.0),
 			deg_to_rad(89.0)
 		)
-
-func take_damage(amount: int) -> void:
-	health = maxi(health - amount, 0)
-	print("HP: ", health)
+@rpc("any_peer","reliable")
+func update_health_bar(health):
+	if not is_multiplayer_authority():
+		return
 	hud.hpupdate(health)
 
-	if health <= 0:
-		print("Eliminated")
-
-
-
-func respawn():
+func take_damage(amount: int) -> void:
 	if not multiplayer.is_server():
 		return
+	health = maxi(health - amount, 0)
+	update_health_bar.rpc(health)
+	if health <= 0:
+		health = 100
+		respawn()
+
+@rpc("any_peer","reliable")
+func apply_respawn(pos):
+	global_position = pos
+
+func respawn():
+	var spawnPoint = BluespawnPoint.pick_random() if team == 0 else RedspawnPoint.pick_random()
+
+	if is_multiplayer_authority():
+		global_position = spawnPoint.global_position
+		rotation = spawnPoint.rotation
+	else:
+		apply_respawn.rpc_id(get_multiplayer_authority(), spawnPoint.global_position)
+	update_health_bar.rpc(health)
+	
 	
 
 # MOVEMENT

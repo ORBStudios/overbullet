@@ -22,7 +22,6 @@ func apply_damage(player,damage):
 	if not multiplayer.is_server():
 		return
 		
-	player.health -= damage
-	if player.health <= 0:
-		player.health = 100
-		player.respawn()
+	player.take_damage(damage)
+	print("damage ",str(player.health))
+	

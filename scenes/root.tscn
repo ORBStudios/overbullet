@@ -1,10 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://c12780im74ex5"]
+[gd_scene load_steps=12 format=3 uid="uid://c12780im74ex5"]
 
 [ext_resource type="Script" uid="uid://mhjr8tebkept" path="res://scripts/network_manger.gd" id="1_jh1ax"]
 [ext_resource type="Script" uid="uid://b08fv58j4jsy3" path="res://scripts/game_manager.gd" id="2_kycxp"]
-[ext_resource type="PackedScene" uid="uid://bneko5eyvkucm" path="res://models/map1.glb" id="3_kycxp"]
-[ext_resource type="Script" uid="uid://bdvl45wajnlab" path="res://scripts/bot.gd" id="3_lrqlo"]
-[ext_resource type="PackedScene" uid="uid://dxawjyuoc7oa0" path="res://scenes/player.tscn" id="4_j287u"]
+[ext_resource type="PackedScene" uid="uid://bhw8e7d3h6dlf" path="res://scenes/map.tscn" id="3_sqa0i"]
 [ext_resource type="Script" uid="uid://bynjy2rmg14nn" path="res://scripts/hud.gd" id="4_sqa0i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7up8o"]
@@ -15,10 +13,6 @@ sky_material = SubResource("ProceduralSkyMaterial_7up8o")
 [sub_resource type="Environment" id="Environment_twpsu"]
 background_mode = 2
 sky = SubResource("Sky_j5px3")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_twpsu"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_sqa0i"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lrqlo"]
 font_size = 26
@@ -42,9 +36,6 @@ script = ExtResource("2_kycxp")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_twpsu")
 
-[node name="map" parent="." instance=ExtResource("3_kycxp")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.6, 0)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 26)
 
@@ -52,49 +43,42 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 _spawnable_scenes = PackedStringArray("uid://dxawjyuoc7oa0")
 spawn_path = NodePath("../players")
 
+[node name="map" parent="." instance=ExtResource("3_sqa0i")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, -1, 0)
+
+[node name="SpawnPoints" type="Node3D" parent="map"]
+
+[node name="BlueSpawnPoints" type="Node3D" parent="map/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.23269)
+
+[node name="spawn" type="Marker3D" parent="map/SpawnPoints/BlueSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.06499, 2.11822, 59.854)
+
+[node name="spawn2" type="Marker3D" parent="map/SpawnPoints/BlueSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7087, 2.11822, 59.854)
+
+[node name="spawn3" type="Marker3D" parent="map/SpawnPoints/BlueSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2819, 2.11822, 59.854)
+
+[node name="spawn4" type="Marker3D" parent="map/SpawnPoints/BlueSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2192, 2.11822, 59.854)
+
+[node name="RedSpawnPoints" type="Node3D" parent="map/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -117.738)
+
+[node name="spawn" type="Marker3D" parent="map/SpawnPoints/RedSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.06499, 2.11822, 59.854)
+
+[node name="spawn2" type="Marker3D" parent="map/SpawnPoints/RedSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7087, 2.11822, 59.854)
+
+[node name="spawn3" type="Marker3D" parent="map/SpawnPoints/RedSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2819, 2.11822, 59.854)
+
+[node name="spawn4" type="Marker3D" parent="map/SpawnPoints/RedSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2192, 2.11822, 59.854)
+
 [node name="players" type="Node3D" parent="."]
-
-[node name="player" parent="players" instance=ExtResource("4_j287u")]
-
-[node name="bot" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
-script = ExtResource("3_lrqlo")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="bot"]
-shape = SubResource("BoxShape3D_twpsu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="bot"]
-mesh = SubResource("BoxMesh_sqa0i")
-
-[node name="bot2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97584, 1, 0)
-script = ExtResource("3_lrqlo")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="bot2"]
-shape = SubResource("BoxShape3D_twpsu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="bot2"]
-mesh = SubResource("BoxMesh_sqa0i")
-
-[node name="bot3" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97584, 1, 6.15745)
-script = ExtResource("3_lrqlo")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="bot3"]
-shape = SubResource("BoxShape3D_twpsu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="bot3"]
-mesh = SubResource("BoxMesh_sqa0i")
-
-[node name="bot4" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.326, 1, 6.15745)
-script = ExtResource("3_lrqlo")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="bot4"]
-shape = SubResource("BoxShape3D_twpsu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="bot4"]
-mesh = SubResource("BoxMesh_sqa0i")
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 script = ExtResource("4_sqa0i")

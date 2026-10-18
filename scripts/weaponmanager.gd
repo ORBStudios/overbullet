@@ -23,7 +23,7 @@ var canshoot: bool = true
 # Changes whenever a new weapon is selected.
 var weapon_switch_id: int = 0
 
-@onready var GameManager = get_tree().current_scene.get_node_or_null("%GameManager")
+@onready var GameManager = get_tree().root.get_node("root/GameManager")
 
 @onready var ray: RayCast3D = $"../RayCast3D"
 @onready var hud: CanvasLayer = get_tree().current_scene.get_node_or_null("%GameUI")
@@ -147,10 +147,12 @@ func req_shoot(pos,dir):
 	var raycast = PhysicsRayQueryParameters3D.create(pos, pos+dir.normalized()*100)
 	var result = get_world_3d().direct_space_state.intersect_ray(raycast)
 	if result.collider is Player:
-		if $players.get_node_or_null(str(shooter_id)).team != result.collider():
+		if get_tree().root.get_node("root/players").get_node_or_null(str(shooter_id)).team != result.collider:
 			GameManager.apply_damage(result.collider,5) #temp damage h
 	
 func shoot() -> void:
+	if not is_multiplayer_authority():
+		return
 	var ammodat = ammos[weaponnow]
 
 	if isdrawing or isreloading or not canshoot:
